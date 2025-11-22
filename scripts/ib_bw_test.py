@@ -10,64 +10,58 @@ SERVER_SSH_HOST = "10.11.0.6"
 # 服务端的 TCP 握手 IP
 SERVER_IP = "10.11.0.6"
 
+# 本地节点的 IP (用于本地客户端测试本地服务端)
+LOCAL_IP = "127.0.0.1"
+
+# 本地节点的 IP (用于远程客户端访问本地服务端) - 需要填写本机实际的网络IP
+LOCAL_IP_FOR_REMOTE = "10.11.0.9"  # 请修改为本机的实际IP地址，例如 "10.11.0.5"
+
 # 设备列表 (假设两台机器都有这8张卡)
 DEVICES = ["mlx5_0", "mlx5_1", "mlx5_2", "mlx5_3", "mlx5_4", "mlx5_5", "mlx5_6", "mlx5_7"]
 
 # 起始端口号 (BW测试通常持续时间稍长，用不同的段避免冲突)
-BASE_PORT = 20000 
+BASE_PORT = 22000 
 # ===========================================
 
 results = []
 
-print(f"Starting 8x8 IB Bandwidth Test (Socket Handshake via {SERVER_IP})...")
+print(f"Starting 16x16 IB Bandwidth Test (Complete matrix test)...")
 print("Note: Bandwidth tests take longer than latency tests.\n")
+print(f"Total tests to run: {len(DEVICES) * 2 * len(DEVICES) * 2}\n")
 
-for client_idx, client_dev in enumerate(DEVICES):
-    row_data = {}
+# 测试函数
+def test_bandwidth(client_dev, server_dev, server_ip, client_is_remote, server_is_remote, port_offset):
+    current_port = BASE_PORT + port_offset
+    client_loc = "Remote" if client_is_remote else "Local"
+    server_loc = "Remote" if server_is_remote else "Local"
+    print(f"Testing BW: {client_loc}[{client_dev}] -> {server_loc}[{server_dev}] (Port: {current_port})")
     
-    for server_idx, server_dev in enumerate(DEVICES):
-        # 生成唯一端口
-        current_port = BASE_PORT + (client_idx * len(DEVICES)) + server_idx
-        
-        print(f"Testing BW: Local[{client_dev}] -> Remote[{server_dev}] (Port: {current_port})")
-
-        # 1. 远程启动 Server (ib_write_bw)
+    # 1. 启动服务端
+    if server_is_remote:
+        # 远程服务端
         server_cmd = f"ssh {SERVER_SSH_HOST} 'ib_write_bw -d {server_dev} -p {current_port}'"
         srv_proc = subprocess.Popen(server_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        
-        time.sleep(2) # 给 Server 多一点启动时间
-
-        # 2. 本地启动 Client
-        # -F: 忽略频率警告
-        # --perform_warm_up: 预热
-        # 默认包大小通常是 65536，足以打满带宽
-        client_cmd = f"ib_write_bw -d {client_dev} -p {current_port} {SERVER_IP} --perform_warm_up -F"
-        
-        bw_val = -1.0
+    else:
+        # 本地服务端
+        server_cmd = f"ib_write_bw -d {server_dev} -p {current_port}"
+        srv_proc = subprocess.Popen(server_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    
+    time.sleep(2)
+    
+    # 2. 启动客户端
+    bw_val = -1.0
+    
+    if client_is_remote:
+        # 远程客户端：通过SSH在远程机器上执行客户端命令
+        client_cmd = f"ssh {SERVER_SSH_HOST} 'ib_write_bw -d {client_dev} -p {current_port} {server_ip} --perform_warm_up -F'"
         
         try:
-            # 运行客户端，BW测试通常需要几秒钟
             output = subprocess.check_output(client_cmd, shell=True, timeout=20).decode("utf-8")
-            
-            # 3. 解析结果
-            # 典型输出格式:
-            # #bytes #iterations    BW peak[Gb/sec]    BW average[Gb/sec]   MsgRate[Mpps]
-            # 65536  1000             192.50             191.20               ...
-            
             lines = output.split('\n')
             for line in lines:
                 parts = line.strip().split()
-                # 寻找数据行：通常以 65536 开头 (默认msg size) 或者是数字开头且列数足够
                 if len(parts) >= 4 and parts[0].isdigit():
                     try:
-                        # ib_write_bw 的列顺序通常是:
-                        # 0: #bytes
-                        # 1: #iterations
-                        # 2: BW peak
-                        # 3: BW average <--- 我们要这个
-                        # 4: MsgRate
-                        
-                        # 简单的校验：确保第一列是包大小 (通常 > 1000)
                         if int(parts[0]) > 1000:
                             bw_val = float(parts[3])
                             break
@@ -78,36 +72,104 @@ for client_idx, client_dev in enumerate(DEVICES):
                 print(f"  -> Success. Avg BW: {bw_val} Mb/sec")
             else:
                 print(f"  -> Failed to parse output.")
-
         except subprocess.CalledProcessError as e:
             print(f"  -> Client Error: {e}")
         except subprocess.TimeoutExpired:
             print(f"  -> Timeout.")
             srv_proc.kill()
+    else:
+        # 本地客户端
+        client_cmd = f"ib_write_bw -d {client_dev} -p {current_port} {server_ip} --perform_warm_up -F"
         
-        row_data[server_dev] = bw_val
-        
-        # 清理 Server 进程
         try:
-            srv_proc.wait(timeout=1)
-        except subprocess.TimeoutExpired:
-            srv_proc.kill()
+            output = subprocess.check_output(client_cmd, shell=True, timeout=20).decode("utf-8")
+            lines = output.split('\n')
+            for line in lines:
+                parts = line.strip().split()
+                if len(parts) >= 4 and parts[0].isdigit():
+                    try:
+                        if int(parts[0]) > 1000:
+                            bw_val = float(parts[3])
+                            break
+                    except (ValueError, IndexError):
+                        continue
             
-        time.sleep(0.5)
+            if bw_val > 0:
+                print(f"  -> Success. Avg BW: {bw_val} Mb/sec")
+            else:
+                print(f"  -> Failed to parse output.")
+        except subprocess.CalledProcessError as e:
+            print(f"  -> Client Error: {e}")
+        except subprocess.TimeoutExpired:
+            print(f"  -> Timeout.")
+            srv_proc.kill()
+    
+    # 3. 清理服务端进程
+    try:
+        srv_proc.wait(timeout=1)
+    except subprocess.TimeoutExpired:
+        srv_proc.kill()
+    
+    time.sleep(0.5)
+    return bw_val
 
-    results.append({"Local_Dev": client_dev, **row_data})
+# 测试本地8张卡作为客户端
+for client_idx, client_dev in enumerate(DEVICES):
+    row_data = {}
+    
+    # 先测试本地8张卡作为服务端
+    for server_idx, server_dev in enumerate(DEVICES):
+        port_offset = (client_idx * len(DEVICES) * 2) + server_idx
+        bw_val = test_bandwidth(client_dev, server_dev, LOCAL_IP, 
+                               client_is_remote=False, server_is_remote=False, 
+                               port_offset=port_offset)
+        row_data[f"Local_{server_dev}"] = bw_val
+    
+    # 再测试远程8张卡作为服务端
+    for server_idx, server_dev in enumerate(DEVICES):
+        port_offset = (client_idx * len(DEVICES) * 2) + len(DEVICES) + server_idx
+        bw_val = test_bandwidth(client_dev, server_dev, SERVER_IP, 
+                               client_is_remote=False, server_is_remote=True, 
+                               port_offset=port_offset)
+        row_data[f"Remote_{server_dev}"] = bw_val
+
+    results.append({"Client_Dev": f"Local_{client_dev}", **row_data})
+
+# 测试远程8张卡作为客户端
+for client_idx, client_dev in enumerate(DEVICES):
+    row_data = {}
+    
+    # 远程客户端 -> 本地8张卡作为服务端
+    for server_idx, server_dev in enumerate(DEVICES):
+        port_offset = ((len(DEVICES) + client_idx) * len(DEVICES) * 2) + server_idx
+        bw_val = test_bandwidth(client_dev, server_dev, LOCAL_IP_FOR_REMOTE, 
+                               client_is_remote=True, server_is_remote=False, 
+                               port_offset=port_offset)
+        row_data[f"Local_{server_dev}"] = bw_val
+    
+    # 远程客户端 -> 远程8张卡作为服务端
+    for server_idx, server_dev in enumerate(DEVICES):
+        port_offset = ((len(DEVICES) + client_idx) * len(DEVICES) * 2) + len(DEVICES) + server_idx
+        bw_val = test_bandwidth(client_dev, server_dev, SERVER_IP, 
+                               client_is_remote=True, server_is_remote=True, 
+                               port_offset=port_offset)
+        row_data[f"Remote_{server_dev}"] = bw_val
+
+    results.append({"Client_Dev": f"Remote_{client_dev}", **row_data})
 
 # ================= 结果输出 =================
-print("\n" + "="*40)
+print("\n" + "="*60)
 print("Bandwidth Matrix (Mb/sec)")
-print("Row: Local Client Device | Column: Remote Server Device")
-print("="*40)
+print("Row: Local + Remote Client Devices | Column: Local + Remote Server Devices")
+print("="*60)
 
 df = pd.DataFrame(results)
-df.set_index("Local_Dev", inplace=True)
+df.set_index("Client_Dev", inplace=True)
 
 print(df)
 
-csv_filename = "ib_bandwidth_matrix_8x8.csv"
+csv_filename = "ib_bandwidth_matrix_16x16.csv"
 df.to_csv(csv_filename)
 print(f"\nResults saved to {csv_filename}")
+print(f"Matrix size: 16 (8 local + 8 remote clients) x 16 (8 local + 8 remote servers)")
+print("Complete 16x16 matrix generated from single execution.")
