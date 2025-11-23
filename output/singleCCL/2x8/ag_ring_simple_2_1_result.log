@@ -1,0 +1,34 @@
+# Collective test starting: all_gather_perf
+# nThread 1 nGpus 1 minBytes 1 maxBytes 4294967296 step: 2(factor) warmup iters: 20 iters: 100 agg iters: 1 validation: 1 graph: 0
+#
+rccl-tests: Version develop:db6ea5a
+# Using devices
+#  Rank  0 Group  0 Pid 382409 on ziyue-mi300-vmss000005 device  0 [0002:00:00] AMD Instinct MI300X VF
+#  Rank  1 Group  0 Pid 382410 on ziyue-mi300-vmss000005 device  1 [0003:00:00] AMD Instinct MI300X VF
+#  Rank  2 Group  0 Pid 382411 on ziyue-mi300-vmss000005 device  2 [0004:00:00] AMD Instinct MI300X VF
+#  Rank  3 Group  0 Pid 382412 on ziyue-mi300-vmss000005 device  3 [0005:00:00] AMD Instinct MI300X VF
+#  Rank  4 Group  0 Pid 382413 on ziyue-mi300-vmss000005 device  4 [0006:00:00] AMD Instinct MI300X VF
+#  Rank  5 Group  0 Pid 382414 on ziyue-mi300-vmss000005 device  5 [0007:00:00] AMD Instinct MI300X VF
+#  Rank  6 Group  0 Pid 382415 on ziyue-mi300-vmss000005 device  6 [0008:00:00] AMD Instinct MI300X VF
+#  Rank  7 Group  0 Pid 382416 on ziyue-mi300-vmss000005 device  7 [0009:00:00] AMD Instinct MI300X VF
+#  Rank  8 Group  0 Pid 518963 on ziyue-mi300-vmss000008 device  0 [0002:00:00] AMD Instinct MI300X VF
+#  Rank  9 Group  0 Pid 518964 on ziyue-mi300-vmss000008 device  1 [0003:00:00] AMD Instinct MI300X VF
+#  Rank 10 Group  0 Pid 518965 on ziyue-mi300-vmss000008 device  2 [0004:00:00] AMD Instinct MI300X VF
+#  Rank 11 Group  0 Pid 518966 on ziyue-mi300-vmss000008 device  3 [0005:00:00] AMD Instinct MI300X VF
+#  Rank 12 Group  0 Pid 518967 on ziyue-mi300-vmss000008 device  4 [0006:00:00] AMD Instinct MI300X VF
+#  Rank 13 Group  0 Pid 518968 on ziyue-mi300-vmss000008 device  5 [0007:00:00] AMD Instinct MI300X VF
+#  Rank 14 Group  0 Pid 518969 on ziyue-mi300-vmss000008 device  6 [0008:00:00] AMD Instinct MI300X VF
+#  Rank 15 Group  0 Pid 518970 on ziyue-mi300-vmss000008 device  7 [0009:00:00] AMD Instinct MI300X VF
+RCCL version : 2.21.5-HEAD:eef7b29
+HIP version  : 6.3.42131-fa1d09cbd
+ROCm version : 6.3.0.0-39-ce2be3b
+Hostname     : ziyue-mi300-vmss000005
+Librccl path : /opt/rocm/lib/librccl.so
+
+ziyue-mi300-vmss000005:382409:382458 [0] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/bootstrap.cc:78 NCCL WARN Message truncated : received 512 bytes instead of 256
+ziyue-mi300-vmss000005: Test NCCL failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1629 'internal error - please report this issue to the NCCL developers / '
+ .. ziyue-mi300-vmss000005 pid 382409: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+
+ziyue-mi300-vmss000005:382416:382463 [7] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/bootstrap.cc:78 NCCL WARN Message truncated : received 512 bytes instead of 256
+ziyue-mi300-vmss000005: Test NCCL failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1629 'internal error - please report this issue to the NCCL developers / '
+ .. ziyue-mi300-vmss000005 pid 382416: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413

@@ -1,0 +1,69 @@
+[1763882855.998610] [ziyue-mi300-vmss000005:372134:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+[1763882855.998529] [ziyue-mi300-vmss000005:372136:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+[1763882855.998894] [ziyue-mi300-vmss000005:372132:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+[1763882856.016328] [ziyue-mi300-vmss000005:372137:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+[1763882856.017626] [ziyue-mi300-vmss000005:372138:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+[1763882856.032253] [ziyue-mi300-vmss000005:372133:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+[1763882856.035672] [ziyue-mi300-vmss000005:372135:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+[1763882856.035798] [ziyue-mi300-vmss000005:372139:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+# Collective test starting: all_gather_perf
+# nThread 1 nGpus 1 minBytes 1 maxBytes 4294967296 step: 2(factor) warmup iters: 20 iters: 100 agg iters: 1 validation: 1 graph: 0
+#
+rccl-tests: Version develop:db6ea5a
+# Using devices
+#  Rank  0 Group  0 Pid 372132 on ziyue-mi300-vmss000005 device  0 [0002:00:00] AMD Instinct MI300X VF
+#  Rank  1 Group  0 Pid 372133 on ziyue-mi300-vmss000005 device  1 [0003:00:00] AMD Instinct MI300X VF
+#  Rank  2 Group  0 Pid 372134 on ziyue-mi300-vmss000005 device  2 [0004:00:00] AMD Instinct MI300X VF
+#  Rank  3 Group  0 Pid 372135 on ziyue-mi300-vmss000005 device  3 [0005:00:00] AMD Instinct MI300X VF
+#  Rank  4 Group  0 Pid 372136 on ziyue-mi300-vmss000005 device  4 [0006:00:00] AMD Instinct MI300X VF
+#  Rank  5 Group  0 Pid 372137 on ziyue-mi300-vmss000005 device  5 [0007:00:00] AMD Instinct MI300X VF
+#  Rank  6 Group  0 Pid 372138 on ziyue-mi300-vmss000005 device  6 [0008:00:00] AMD Instinct MI300X VF
+#  Rank  7 Group  0 Pid 372139 on ziyue-mi300-vmss000005 device  7 [0009:00:00] AMD Instinct MI300X VF
+RCCL version : 2.21.5-HEAD:eef7b29
+HIP version  : 6.3.42131-fa1d09cbd
+ROCm version : 6.3.0.0-39-ce2be3b
+Hostname     : ziyue-mi300-vmss000005
+Librccl path : /opt/rocm/lib/librccl.so
+#
+#                                                              out-of-place                       in-place          
+#       size         count      type   redop    root     time   algbw   busbw #wrong     time   algbw   busbw #wrong                               
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)            (us)  (GB/s)  (GB/s)                                      
+           0             0     float    none      -1     0.20    0.00    0.00      0     0.20    0.00    0.00      0
+           0             0     float    none      -1     0.20    0.00    0.00      0     0.20    0.00    0.00      0
+           0             0     float    none      -1     0.20    0.00    0.00      0     0.20    0.00    0.00      0
+           0             0     float    none      -1     0.20    0.00    0.00      0     0.20    0.00    0.00      0
+           0             0     float    none      -1     0.21    0.00    0.00      0     0.21    0.00    0.00      0
+           0             0     float    none      -1     0.21    0.00    0.00      0     0.20    0.00    0.00      0
+           0             0     float    none      -1     0.19    0.00    0.00      0     0.19    0.00    0.00      0
+         128             4     float    none      -1    18.19    0.01    0.01      0    10.59    0.01    0.01      0
+         256             8     float    none      -1    17.71    0.01    0.01      0    10.65    0.02    0.02      0
+         512            16     float    none      -1    17.67    0.03    0.03      0    10.48    0.05    0.04      0
+        1024            32     float    none      -1    17.78    0.06    0.05      0    10.49    0.10    0.09      0
+        2048            64     float    none      -1    18.20    0.11    0.10      0    11.10    0.18    0.16      0
+        4096           128     float    none      -1    18.31    0.22    0.20      0    10.09    0.41    0.36      0
+        8192           256     float    none      -1    18.50    0.44    0.39      0    10.79    0.76    0.66      0
+       16384           512     float    none      -1    18.96    0.86    0.76      0    10.12    1.62    1.42      0
+       32768          1024     float    none      -1    19.22    1.70    1.49      0    10.79    3.04    2.66      0
+       65536          2048     float    none      -1    19.21    3.41    2.99      0    10.28    6.37    5.58      0
+      131072          4096     float    none      -1    19.43    6.75    5.90      0    10.96   11.96   10.46      0
+      262144          8192     float    none      -1    19.49   13.45   11.77      0    10.66   24.59   21.52      0
+      524288         16384     float    none      -1    33.30   15.74   13.78      0    12.14   43.20   37.80      0
+     1048576         32768     float    none      -1    35.47   29.57   25.87      0    13.92   75.32   65.91      0
+     2097152         65536     float    none      -1    39.40   53.23   46.57      0    20.00  104.85   91.74      0
+     4194304        131072     float    none      -1    46.95   89.33   78.16      0    28.93  145.00  126.87      0
+     8388608        262144     float    none      -1    60.02  139.76  122.29      0    47.07  178.23  155.95      0
+    16777216        524288     float    none      -1    95.92  174.91  153.05      0    83.24  201.55  176.36      0
+    33554432       1048576     float    none      -1    142.4  235.66  206.20      0    155.3  216.07  189.06      0
+    67108864       2097152     float    none      -1    235.8  284.62  249.04      0    296.3  226.45  198.15      0
+   134217728       4194304     float    none      -1    424.2  316.41  276.86      0    567.8  236.37  206.82      0
+   268435456       8388608     float    none      -1    806.0  333.03  291.40      0   1088.4  246.63  215.80      0
+   536870912      16777216     float    none      -1   1569.4  342.08  299.32      0   2127.4  252.36  220.82      0
+  1073741824      33554432     float    none      -1   3082.5  348.34  304.79      0   4150.6  258.70  226.36      0
+  2147483648      67108864     float    none      -1   6094.0  352.39  308.35      0   8151.9  263.43  230.50      0
+  4294967296     134217728     float    none      -1    12093  355.15  310.76      0    16209  264.98  231.86      0
+# Errors with asterisks indicate errors that have exceeded the maximum threshold.
+# Out of bounds values : 0 OK
+# Avg bus bandwidth    : 77.683 
+#
+# Collective test concluded: all_gather_perf
+

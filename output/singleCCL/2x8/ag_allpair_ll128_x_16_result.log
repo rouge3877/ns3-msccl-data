@@ -1,0 +1,58 @@
+# Collective test starting: all_gather_perf
+# nThread 1 nGpus 1 minBytes 1 maxBytes 4294967296 step: 2(factor) warmup iters: 20 iters: 100 agg iters: 1 validation: 1 graph: 0
+#
+rccl-tests: Version develop:db6ea5a
+# Using devices
+#  Rank  0 Group  0 Pid 378273 on ziyue-mi300-vmss000005 device  0 [0002:00:00] AMD Instinct MI300X VF
+#  Rank  1 Group  0 Pid 378274 on ziyue-mi300-vmss000005 device  1 [0003:00:00] AMD Instinct MI300X VF
+#  Rank  2 Group  0 Pid 378275 on ziyue-mi300-vmss000005 device  2 [0004:00:00] AMD Instinct MI300X VF
+#  Rank  3 Group  0 Pid 378276 on ziyue-mi300-vmss000005 device  3 [0005:00:00] AMD Instinct MI300X VF
+#  Rank  4 Group  0 Pid 378277 on ziyue-mi300-vmss000005 device  4 [0006:00:00] AMD Instinct MI300X VF
+#  Rank  5 Group  0 Pid 378278 on ziyue-mi300-vmss000005 device  5 [0007:00:00] AMD Instinct MI300X VF
+#  Rank  6 Group  0 Pid 378279 on ziyue-mi300-vmss000005 device  6 [0008:00:00] AMD Instinct MI300X VF
+#  Rank  7 Group  0 Pid 378280 on ziyue-mi300-vmss000005 device  7 [0009:00:00] AMD Instinct MI300X VF
+#  Rank  8 Group  0 Pid 514693 on ziyue-mi300-vmss000008 device  0 [0002:00:00] AMD Instinct MI300X VF
+#  Rank  9 Group  0 Pid 514694 on ziyue-mi300-vmss000008 device  1 [0003:00:00] AMD Instinct MI300X VF
+#  Rank 10 Group  0 Pid 514695 on ziyue-mi300-vmss000008 device  2 [0004:00:00] AMD Instinct MI300X VF
+#  Rank 11 Group  0 Pid 514696 on ziyue-mi300-vmss000008 device  3 [0005:00:00] AMD Instinct MI300X VF
+#  Rank 12 Group  0 Pid 514697 on ziyue-mi300-vmss000008 device  4 [0006:00:00] AMD Instinct MI300X VF
+#  Rank 13 Group  0 Pid 514698 on ziyue-mi300-vmss000008 device  5 [0007:00:00] AMD Instinct MI300X VF
+#  Rank 14 Group  0 Pid 514699 on ziyue-mi300-vmss000008 device  6 [0008:00:00] AMD Instinct MI300X VF
+#  Rank 15 Group  0 Pid 514700 on ziyue-mi300-vmss000008 device  7 [0009:00:00] AMD Instinct MI300X VF
+RCCL version : 2.21.5-HEAD:eef7b29
+HIP version  : 6.3.42131-fa1d09cbd
+ROCm version : 6.3.0.0-39-ce2be3b
+Hostname     : ziyue-mi300-vmss000005
+Librccl path : /opt/rocm/lib/librccl.so
+
+ziyue-mi300-vmss000005:378275:378324 [2] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/misc/msccl/msccl_parser.cc:422 NCCL WARN MSCCL: too many thread blocks are requested. Max thread blocks: 64
+ziyue-mi300-vmss000005: Test NCCL failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1629 'invalid usage (run with NCCL_DEBUG=WARN for details) / '
+ .. ziyue-mi300-vmss000005 pid 378275: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+
+ziyue-mi300-vmss000005:378273:378322 [0] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/misc/msccl/msccl_parser.cc:422 NCCL WARN MSCCL: too many thread blocks are requested. Max thread blocks: 64
+
+ziyue-mi300-vmss000005:378278:378327 [5] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/misc/msccl/msccl_parser.cc:422 NCCL WARN MSCCL: too many thread blocks are requested. Max thread blocks: 64
+ziyue-mi300-vmss000005: Test NCCL failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1629 'invalid usage (run with NCCL_DEBUG=WARN for details) / '
+ .. ziyue-mi300-vmss000005 pid 378273: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+ziyue-mi300-vmss000005: Test NCCL failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1629 'invalid usage (run with NCCL_DEBUG=WARN for details) / '
+ .. ziyue-mi300-vmss000005 pid 378278: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+
+ziyue-mi300-vmss000005:378280:378329 [7] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/misc/msccl/msccl_parser.cc:422 NCCL WARN MSCCL: too many thread blocks are requested. Max thread blocks: 64
+ziyue-mi300-vmss000005: Test NCCL failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1629 'invalid usage (run with NCCL_DEBUG=WARN for details) / '
+ .. ziyue-mi300-vmss000005 pid 378280: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+
+ziyue-mi300-vmss000005:378277:378323 [4] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/misc/msccl/msccl_parser.cc:422 NCCL WARN MSCCL: too many thread blocks are requested. Max thread blocks: 64
+ziyue-mi300-vmss000005: Test NCCL failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1629 'invalid usage (run with NCCL_DEBUG=WARN for details) / '
+ .. ziyue-mi300-vmss000005 pid 378277: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+
+ziyue-mi300-vmss000005:378279:378325 [6] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/misc/msccl/msccl_parser.cc:422 NCCL WARN MSCCL: too many thread blocks are requested. Max thread blocks: 64
+ziyue-mi300-vmss000005: Test NCCL failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1629 'invalid usage (run with NCCL_DEBUG=WARN for details) / '
+ .. ziyue-mi300-vmss000005 pid 378279: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+
+ziyue-mi300-vmss000005:378274:378326 [1] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/misc/msccl/msccl_parser.cc:422 NCCL WARN MSCCL: too many thread blocks are requested. Max thread blocks: 64
+
+ziyue-mi300-vmss000005:378276:378328 [3] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/misc/msccl/msccl_parser.cc:422 NCCL WARN MSCCL: too many thread blocks are requested. Max thread blocks: 64
+ziyue-mi300-vmss000005: Test NCCL failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1629 'invalid usage (run with NCCL_DEBUG=WARN for details) / '
+ .. ziyue-mi300-vmss000005 pid 378274: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+ziyue-mi300-vmss000005: Test NCCL failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1629 'invalid usage (run with NCCL_DEBUG=WARN for details) / '
+ .. ziyue-mi300-vmss000005 pid 378276: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413

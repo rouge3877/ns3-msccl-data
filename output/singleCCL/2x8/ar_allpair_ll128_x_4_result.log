@@ -1,0 +1,42 @@
+# Collective test starting: all_reduce_perf
+# nThread 1 nGpus 1 minBytes 1 maxBytes 4294967296 step: 2(factor) warmup iters: 20 iters: 100 agg iters: 1 validation: 1 graph: 0
+#
+rccl-tests: Version develop:db6ea5a
+# Using devices
+#  Rank  0 Group  0 Pid 383357 on ziyue-mi300-vmss000005 device  0 [0002:00:00] AMD Instinct MI300X VF
+#  Rank  1 Group  0 Pid 383358 on ziyue-mi300-vmss000005 device  1 [0003:00:00] AMD Instinct MI300X VF
+#  Rank  2 Group  0 Pid 383359 on ziyue-mi300-vmss000005 device  2 [0004:00:00] AMD Instinct MI300X VF
+#  Rank  3 Group  0 Pid 383360 on ziyue-mi300-vmss000005 device  3 [0005:00:00] AMD Instinct MI300X VF
+#  Rank  4 Group  0 Pid 383361 on ziyue-mi300-vmss000005 device  4 [0006:00:00] AMD Instinct MI300X VF
+#  Rank  5 Group  0 Pid 383362 on ziyue-mi300-vmss000005 device  5 [0007:00:00] AMD Instinct MI300X VF
+#  Rank  6 Group  0 Pid 383363 on ziyue-mi300-vmss000005 device  6 [0008:00:00] AMD Instinct MI300X VF
+#  Rank  7 Group  0 Pid 383364 on ziyue-mi300-vmss000005 device  7 [0009:00:00] AMD Instinct MI300X VF
+#  Rank  8 Group  0 Pid 519947 on ziyue-mi300-vmss000008 device  0 [0002:00:00] AMD Instinct MI300X VF
+#  Rank  9 Group  0 Pid 519948 on ziyue-mi300-vmss000008 device  1 [0003:00:00] AMD Instinct MI300X VF
+#  Rank 10 Group  0 Pid 519949 on ziyue-mi300-vmss000008 device  2 [0004:00:00] AMD Instinct MI300X VF
+#  Rank 11 Group  0 Pid 519950 on ziyue-mi300-vmss000008 device  3 [0005:00:00] AMD Instinct MI300X VF
+#  Rank 12 Group  0 Pid 519951 on ziyue-mi300-vmss000008 device  4 [0006:00:00] AMD Instinct MI300X VF
+#  Rank 13 Group  0 Pid 519952 on ziyue-mi300-vmss000008 device  5 [0007:00:00] AMD Instinct MI300X VF
+#  Rank 14 Group  0 Pid 519953 on ziyue-mi300-vmss000008 device  6 [0008:00:00] AMD Instinct MI300X VF
+#  Rank 15 Group  0 Pid 519954 on ziyue-mi300-vmss000008 device  7 [0009:00:00] AMD Instinct MI300X VF
+RCCL version : 2.21.5-HEAD:eef7b29
+HIP version  : 6.3.42131-fa1d09cbd
+ROCm version : 6.3.0.0-39-ce2be3b
+Hostname     : ziyue-mi300-vmss000005
+Librccl path : /opt/rocm/lib/librccl.so
+#
+#                                                              out-of-place                       in-place          
+#       size         count      type   redop    root     time   algbw   busbw #wrong     time   algbw   busbw #wrong                               
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)            (us)  (GB/s)  (GB/s)                                      
+           0             0     float     sum      -1     0.22    0.00    0.00      0     0.21    0.00    0.00      0
+           0             0     float     sum      -1     0.21    0.00    0.00      0     0.21    0.00    0.00      0
+           4             1     float     sum      -1    29.29    0.00    0.00      0    27.91    0.00    0.00      0
+           8             2     float     sum      -1    27.72    0.00    0.00      0    28.04    0.00    0.00      0
+          16             4     float     sum      -1    27.51    0.00    0.00      0    27.49    0.00    0.00      0
+          32             8     float     sum      -1    29.76    0.00    0.00      0    27.52    0.00    0.00      0
+          64            16     float     sum      -1    27.74    0.00    0.00      0    27.78    0.00    0.00      0
+         128            32     float     sum      -1    27.97    0.00    0.01      0    28.11    0.00    0.01      0
+         256            64     float     sum      -1    28.66    0.01    0.02      0    28.50    0.01    0.02      0
+         512           128     float     sum      -1    29.23    0.02    0.03      0    29.35    0.02    0.03      0
+        1024           256     float     sum      -1    30.34    0.03    0.06      0    29.85    0.03    0.06      0
+        2048           512     float     sum      -1    32.42    0.06    0.12      0    32.75    0.06    0.12      0

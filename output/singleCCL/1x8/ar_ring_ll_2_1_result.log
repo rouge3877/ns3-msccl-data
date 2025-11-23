@@ -1,0 +1,115 @@
+[1763884800.425375] [ziyue-mi300-vmss000005:376752:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+[1763884800.429588] [ziyue-mi300-vmss000005:376750:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+[1763884800.430806] [ziyue-mi300-vmss000005:376748:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+[1763884800.433686] [ziyue-mi300-vmss000005:376751:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+[1763884800.434733] [ziyue-mi300-vmss000005:376753:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+[1763884800.435464] [ziyue-mi300-vmss000005:376747:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+[1763884800.435474] [ziyue-mi300-vmss000005:376749:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+[1763884800.448355] [ziyue-mi300-vmss000005:376746:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+# Collective test starting: all_reduce_perf
+# nThread 1 nGpus 1 minBytes 1 maxBytes 4294967296 step: 2(factor) warmup iters: 20 iters: 100 agg iters: 1 validation: 1 graph: 0
+#
+rccl-tests: Version develop:db6ea5a
+# Using devices
+#  Rank  0 Group  0 Pid 376746 on ziyue-mi300-vmss000005 device  0 [0002:00:00] AMD Instinct MI300X VF
+#  Rank  1 Group  0 Pid 376747 on ziyue-mi300-vmss000005 device  1 [0003:00:00] AMD Instinct MI300X VF
+#  Rank  2 Group  0 Pid 376748 on ziyue-mi300-vmss000005 device  2 [0004:00:00] AMD Instinct MI300X VF
+#  Rank  3 Group  0 Pid 376749 on ziyue-mi300-vmss000005 device  3 [0005:00:00] AMD Instinct MI300X VF
+#  Rank  4 Group  0 Pid 376750 on ziyue-mi300-vmss000005 device  4 [0006:00:00] AMD Instinct MI300X VF
+#  Rank  5 Group  0 Pid 376751 on ziyue-mi300-vmss000005 device  5 [0007:00:00] AMD Instinct MI300X VF
+#  Rank  6 Group  0 Pid 376752 on ziyue-mi300-vmss000005 device  6 [0008:00:00] AMD Instinct MI300X VF
+#  Rank  7 Group  0 Pid 376753 on ziyue-mi300-vmss000005 device  7 [0009:00:00] AMD Instinct MI300X VF
+RCCL version : 2.21.5-HEAD:eef7b29
+HIP version  : 6.3.42131-fa1d09cbd
+ROCm version : 6.3.0.0-39-ce2be3b
+Hostname     : ziyue-mi300-vmss000005
+Librccl path : /opt/rocm/lib/librccl.so
+#
+#                                                              out-of-place                       in-place          
+#       size         count      type   redop    root     time   algbw   busbw #wrong     time   algbw   busbw #wrong                               
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)            (us)  (GB/s)  (GB/s)                                      
+           0             0     float     sum      -1     0.20    0.00    0.00      0     0.20    0.00    0.00      0
+           0             0     float     sum      -1     0.20    0.00    0.00      0     0.21    0.00    0.00      0
+           4             1     float     sum      -1    16.79    0.00    0.00      0    16.79    0.00    0.00      0
+           8             2     float     sum      -1    16.66    0.00    0.00      0    16.77    0.00    0.00      0
+          16             4     float     sum      -1    16.49    0.00    0.00      0    16.68    0.00    0.00      0
+
+ziyue-mi300-vmss000005:376749:376749 [3] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/misc/msccl/msccl_setup.cc:436 NCCL WARN MSCCL: this version of MSCCL build doesn't support full Ops
+ziyue-mi300-vmss000005: Test NCCL failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:52 'internal error - please report this issue to the NCCL developers / '
+ .. ziyue-mi300-vmss000005 pid 376749: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:639
+ .. ziyue-mi300-vmss000005 pid 376749: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:673
+ .. ziyue-mi300-vmss000005 pid 376749: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:974
+ .. ziyue-mi300-vmss000005 pid 376749: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:102
+ .. ziyue-mi300-vmss000005 pid 376749: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1002
+ .. ziyue-mi300-vmss000005 pid 376749: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1737
+ .. ziyue-mi300-vmss000005 pid 376749: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+
+ziyue-mi300-vmss000005:376753:376753 [7] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/misc/msccl/msccl_setup.cc:436 NCCL WARN MSCCL: this version of MSCCL build doesn't support full Ops
+ziyue-mi300-vmss000005: Test NCCL failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:52 'internal error - please report this issue to the NCCL developers / '
+ .. ziyue-mi300-vmss000005 pid 376753: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:639
+ .. ziyue-mi300-vmss000005 pid 376753: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:673
+ .. ziyue-mi300-vmss000005 pid 376753: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:974
+ .. ziyue-mi300-vmss000005 pid 376753: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:102
+ .. ziyue-mi300-vmss000005 pid 376753: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1002
+ .. ziyue-mi300-vmss000005 pid 376753: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1737
+ .. ziyue-mi300-vmss000005 pid 376753: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+
+ziyue-mi300-vmss000005:376750:376750 [4] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/misc/msccl/msccl_setup.cc:436 NCCL WARN MSCCL: this version of MSCCL build doesn't support full Ops
+ziyue-mi300-vmss000005: Test NCCL failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:52 'internal error - please report this issue to the NCCL developers / '
+ .. ziyue-mi300-vmss000005 pid 376750: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:639
+ .. ziyue-mi300-vmss000005 pid 376750: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:673
+ .. ziyue-mi300-vmss000005 pid 376750: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:974
+ .. ziyue-mi300-vmss000005 pid 376750: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:102
+ .. ziyue-mi300-vmss000005 pid 376750: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1002
+ .. ziyue-mi300-vmss000005 pid 376750: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1737
+ .. ziyue-mi300-vmss000005 pid 376750: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+
+ziyue-mi300-vmss000005:376747:376747 [1] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/misc/msccl/msccl_setup.cc:436 NCCL WARN MSCCL: this version of MSCCL build doesn't support full Ops
+ziyue-mi300-vmss000005: Test NCCL failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:52 'internal error - please report this issue to the NCCL developers / '
+ .. ziyue-mi300-vmss000005 pid 376747: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:639
+ .. ziyue-mi300-vmss000005 pid 376747: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:673
+ .. ziyue-mi300-vmss000005 pid 376747: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:974
+ .. ziyue-mi300-vmss000005 pid 376747: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:102
+ .. ziyue-mi300-vmss000005 pid 376747: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1002
+ .. ziyue-mi300-vmss000005 pid 376747: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1737
+ .. ziyue-mi300-vmss000005 pid 376747: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+
+ziyue-mi300-vmss000005:376752:376752 [6] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/misc/msccl/msccl_setup.cc:436 NCCL WARN MSCCL: this version of MSCCL build doesn't support full Ops
+ziyue-mi300-vmss000005: Test NCCL failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:52 'internal error - please report this issue to the NCCL developers / '
+ .. ziyue-mi300-vmss000005 pid 376752: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:639
+ .. ziyue-mi300-vmss000005 pid 376752: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:673
+ .. ziyue-mi300-vmss000005 pid 376752: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:974
+ .. ziyue-mi300-vmss000005 pid 376752: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:102
+ .. ziyue-mi300-vmss000005 pid 376752: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1002
+ .. ziyue-mi300-vmss000005 pid 376752: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1737
+ .. ziyue-mi300-vmss000005 pid 376752: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+
+ziyue-mi300-vmss000005:376748:376748 [2] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/misc/msccl/msccl_setup.cc:436 NCCL WARN MSCCL: this version of MSCCL build doesn't support full Ops
+ziyue-mi300-vmss000005: Test NCCL failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:52 'internal error - please report this issue to the NCCL developers / '
+ .. ziyue-mi300-vmss000005 pid 376748: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:639
+ .. ziyue-mi300-vmss000005 pid 376748: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:673
+ .. ziyue-mi300-vmss000005 pid 376748: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:974
+ .. ziyue-mi300-vmss000005 pid 376748: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:102
+ .. ziyue-mi300-vmss000005 pid 376748: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1002
+ .. ziyue-mi300-vmss000005 pid 376748: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1737
+ .. ziyue-mi300-vmss000005 pid 376748: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+
+ziyue-mi300-vmss000005:376751:376751 [5] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/misc/msccl/msccl_setup.cc:436 NCCL WARN MSCCL: this version of MSCCL build doesn't support full Ops
+ziyue-mi300-vmss000005: Test NCCL failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:52 'internal error - please report this issue to the NCCL developers / '
+ .. ziyue-mi300-vmss000005 pid 376751: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:639
+ .. ziyue-mi300-vmss000005 pid 376751: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:673
+ .. ziyue-mi300-vmss000005 pid 376751: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:974
+ .. ziyue-mi300-vmss000005 pid 376751: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:102
+ .. ziyue-mi300-vmss000005 pid 376751: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1002
+ .. ziyue-mi300-vmss000005 pid 376751: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1737
+ .. ziyue-mi300-vmss000005 pid 376751: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+          32             8     float     sum      -1    16.50    0.00    0.00      0
+ziyue-mi300-vmss000005:376746:376746 [0] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/misc/msccl/msccl_setup.cc:436 NCCL WARN MSCCL: this version of MSCCL build doesn't support full Ops
+ziyue-mi300-vmss000005: Test NCCL failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:52 'internal error - please report this issue to the NCCL developers / '
+ .. ziyue-mi300-vmss000005 pid 376746: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:639
+ .. ziyue-mi300-vmss000005 pid 376746: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:673
+ .. ziyue-mi300-vmss000005 pid 376746: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:974
+ .. ziyue-mi300-vmss000005 pid 376746: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:102
+ .. ziyue-mi300-vmss000005 pid 376746: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1002
+ .. ziyue-mi300-vmss000005 pid 376746: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1737
+ .. ziyue-mi300-vmss000005 pid 376746: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413

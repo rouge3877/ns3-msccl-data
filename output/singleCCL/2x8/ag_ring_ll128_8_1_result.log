@@ -1,0 +1,48 @@
+# Collective test starting: all_gather_perf
+# nThread 1 nGpus 1 minBytes 1 maxBytes 4294967296 step: 2(factor) warmup iters: 20 iters: 100 agg iters: 1 validation: 1 graph: 0
+#
+rccl-tests: Version develop:db6ea5a
+# Using devices
+#  Rank  0 Group  0 Pid 381143 on ziyue-mi300-vmss000005 device  0 [0002:00:00] AMD Instinct MI300X VF
+#  Rank  1 Group  0 Pid 381144 on ziyue-mi300-vmss000005 device  1 [0003:00:00] AMD Instinct MI300X VF
+#  Rank  2 Group  0 Pid 381145 on ziyue-mi300-vmss000005 device  2 [0004:00:00] AMD Instinct MI300X VF
+#  Rank  3 Group  0 Pid 381146 on ziyue-mi300-vmss000005 device  3 [0005:00:00] AMD Instinct MI300X VF
+#  Rank  4 Group  0 Pid 381147 on ziyue-mi300-vmss000005 device  4 [0006:00:00] AMD Instinct MI300X VF
+#  Rank  5 Group  0 Pid 381148 on ziyue-mi300-vmss000005 device  5 [0007:00:00] AMD Instinct MI300X VF
+#  Rank  6 Group  0 Pid 381149 on ziyue-mi300-vmss000005 device  6 [0008:00:00] AMD Instinct MI300X VF
+#  Rank  7 Group  0 Pid 381150 on ziyue-mi300-vmss000005 device  7 [0009:00:00] AMD Instinct MI300X VF
+#  Rank  8 Group  0 Pid 517651 on ziyue-mi300-vmss000008 device  0 [0002:00:00] AMD Instinct MI300X VF
+#  Rank  9 Group  0 Pid 517652 on ziyue-mi300-vmss000008 device  1 [0003:00:00] AMD Instinct MI300X VF
+#  Rank 10 Group  0 Pid 517653 on ziyue-mi300-vmss000008 device  2 [0004:00:00] AMD Instinct MI300X VF
+#  Rank 11 Group  0 Pid 517654 on ziyue-mi300-vmss000008 device  3 [0005:00:00] AMD Instinct MI300X VF
+#  Rank 12 Group  0 Pid 517655 on ziyue-mi300-vmss000008 device  4 [0006:00:00] AMD Instinct MI300X VF
+#  Rank 13 Group  0 Pid 517656 on ziyue-mi300-vmss000008 device  5 [0007:00:00] AMD Instinct MI300X VF
+#  Rank 14 Group  0 Pid 517657 on ziyue-mi300-vmss000008 device  6 [0008:00:00] AMD Instinct MI300X VF
+#  Rank 15 Group  0 Pid 517658 on ziyue-mi300-vmss000008 device  7 [0009:00:00] AMD Instinct MI300X VF
+RCCL version : 2.21.5-HEAD:eef7b29
+HIP version  : 6.3.42131-fa1d09cbd
+ROCm version : 6.3.0.0-39-ce2be3b
+Hostname     : ziyue-mi300-vmss000005
+Librccl path : /opt/rocm/lib/librccl.so
+
+ziyue-mi300-vmss000008:517651:517706 [0] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/bootstrap.cc:78 NCCL WARN Message truncated : received 1024 bytes instead of 512
+ziyue-mi300-vmss000008: Test NCCL failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1629 'internal error - please report this issue to the NCCL developers / '
+ .. ziyue-mi300-vmss000008 pid 517651: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+
+ziyue-mi300-vmss000008:517658:517700 [7] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/bootstrap.cc:78 NCCL WARN Message truncated : received 1024 bytes instead of 512
+ziyue-mi300-vmss000008: Test NCCL failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1629 'internal error - please report this issue to the NCCL developers / '
+ .. ziyue-mi300-vmss000008 pid 517658: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+
+ziyue-mi300-vmss000005:381150:381269 [7] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/misc/socket.cc:717 NCCL WARN ncclSocketInit: connecting to address  with family 7 is neither AF_INET(2) nor AF_INET6(10)
+
+ziyue-mi300-vmss000005:381150:381269 [7] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/misc/socket.cc:717 NCCL WARN ncclSocketInit: connecting to address  with family 7 is neither AF_INET(2) nor AF_INET6(10)
+
+ziyue-mi300-vmss000005:381150:381269 [7] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/misc/socket.cc:717 NCCL WARN ncclSocketInit: connecting to address  with family 7 is neither AF_INET(2) nor AF_INET6(10)
+
+ziyue-mi300-vmss000005:381150:381269 [7] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/misc/socket.cc:717 NCCL WARN ncclSocketInit: connecting to address  with family 7 is neither AF_INET(2) nor AF_INET6(10)
+
+ziyue-mi300-vmss000005:381150:381269 [7] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/proxy.cc:1552 NCCL WARN [Service thread] Error encountered progressing operation=Connect, res=3, closing connection
+
+ziyue-mi300-vmss000005:381150:381269 [7] /long_pathname_so_that_rpms_can_package_the_debug_info/src/rccl/build/hipify/src/proxy.cc:1586 NCCL WARN [Proxy Service 7] Failed to execute operation Connect from rank 7, retcode 3
+ziyue-mi300-vmss000005: Test NCCL failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1629 'internal error - please report this issue to the NCCL developers / '
+ .. ziyue-mi300-vmss000005 pid 381150: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
