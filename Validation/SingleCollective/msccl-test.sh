@@ -21,6 +21,7 @@ LD_PRELOAD=/opt/rocm/lib/librccl.so:$LD_PRELOAD
 NCCL_DEBUG=WARN
 RCCL_MSCCLPP_THRESHOLD=0
 RCCL_TEST_OUTPUT_PREFIX="-Z csv --output_file "
+RCCL_ADDITIONAL_OPTS=" --timeout 10 "
 
 MPI_COMMON_V="/opt/ompi/bin/mpirun --allow-run-as-root --tag-output" # Verbose caused by "--tag-output"
 MPI_COMMON="/opt/ompi/bin/mpirun --allow-run-as-root"
@@ -74,7 +75,8 @@ exec_one_node() {
     ${PERF_PATH_PRE}${algo_type}_perf \
     -b ${b} -e ${e} \
     -f 2 -g 1 -c 1 \
-    -w 20 -n 100
+    -w 20 -n 100 \
+    ${RCCL_ADDITIONAL_OPTS}
 }
 
 exec_two_nodes() {
@@ -94,7 +96,8 @@ exec_two_nodes() {
     ${PERF_PATH_PRE}${algo_type}_perf \
     -b ${b} -e ${e} \
     -f 2 -g 1 -c 1 \
-    -w 20 -n 100
+    -w 20 -n 100 \
+    ${RCCL_ADDITIONAL_OPTS}
 }
 
 setup_temp_dir() {
@@ -133,7 +136,10 @@ main() {
     local set_name=$1
     local input_path="Input/${set_name}"
     local output_path="GroundTruth/${set_name}"
-    local lower=1
+    if [ ! -d ${output_path} ]; then
+        mkdir -p ${output_path}
+    fi
+    local lower=8B
     local upper=4GB
 
     for xml_file in ${input_path}/*.xml; do
