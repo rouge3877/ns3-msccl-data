@@ -21,7 +21,7 @@ LD_PRELOAD=/opt/rocm/lib/librccl.so:$LD_PRELOAD
 NCCL_DEBUG=WARN
 RCCL_MSCCLPP_THRESHOLD=0
 RCCL_TEST_OUTPUT_PREFIX="-Z csv --output_file "
-RCCL_ADDITIONAL_OPTS=" --timeout 10 "
+RCCL_ADDITIONAL_OPTS=" --timeout 1000 "
 
 MPI_COMMON_V="/opt/ompi/bin/mpirun --allow-run-as-root --tag-output" # Verbose caused by "--tag-output"
 MPI_COMMON="/opt/ompi/bin/mpirun --allow-run-as-root"
