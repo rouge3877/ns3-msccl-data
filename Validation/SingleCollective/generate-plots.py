@@ -31,7 +31,7 @@ plt.rcParams['legend.fancybox'] = False
 
 # Paths
 BASE_DIR = Path("/home/yxli/data/Validation/SingleCollective")
-SET_NAME = "1x8-allgather-ring"
+SET_NAME = "1x8-allgather-allpair"
 GROUND_TRUTH_DIR = BASE_DIR / "GroundTruth" / SET_NAME
 SIM_RESULT_FILE = BASE_DIR / "SimResult" / f"{SET_NAME}.txt"
 OUTPUT_DIR = BASE_DIR / "PostData" / SET_NAME
