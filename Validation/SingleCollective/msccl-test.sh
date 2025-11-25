@@ -139,7 +139,7 @@ main() {
     if [ ! -d ${output_path} ]; then
         mkdir -p ${output_path}
     fi
-    local lower=8B
+    local lower=8
     local upper=4GB
 
     for xml_file in ${input_path}/*.xml; do
