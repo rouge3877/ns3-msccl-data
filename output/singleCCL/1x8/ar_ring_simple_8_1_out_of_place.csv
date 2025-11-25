@@ -1,7 +1,0 @@
-size,count,type,redop,root,time,algbw,busbw,wrong
-0,0,float,sum,-1,0.20,0.00,0.00,0
-0,0,float,sum,-1,0.20,0.00,0.00,0
-4,1,float,sum,-1,17.17,0.00,0.00,0
-8,2,float,sum,-1,16.98,0.00,0.00,0
-16,4,float,sum,-1,16.99,0.00,0.00,0
-32,8,float,sum,-1,17.01,0.00,0.00,0
