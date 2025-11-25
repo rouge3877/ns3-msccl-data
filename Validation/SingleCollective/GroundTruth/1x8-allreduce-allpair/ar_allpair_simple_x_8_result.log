@@ -1,0 +1,120 @@
+[1764082889.164867] [ziyue-mi300-vmss000008:536092:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+[1764082889.171465] [ziyue-mi300-vmss000008:536088:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+[1764082889.173723] [ziyue-mi300-vmss000008:536089:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+[1764082889.175684] [ziyue-mi300-vmss000008:536093:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+[1764082889.176816] [ziyue-mi300-vmss000008:536090:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+[1764082889.178690] [ziyue-mi300-vmss000008:536091:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+[1764082889.180213] [ziyue-mi300-vmss000008:536087:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+[1764082889.182436] [ziyue-mi300-vmss000008:536086:0]         parser.c:1686 UCX  WARN  unused env variable: UCX_HOME (set UCX_WARN_UNUSED_ENV_VARS=n to suppress this warning)
+# Collective test starting: all_reduce_perf
+# nThread 1 nGpus 1 minBytes 8 maxBytes 4294967296 step: 2(factor) warmup iters: 20 iters: 100 agg iters: 1 validation: 1 graph: 0
+#
+rccl-tests: Version develop:db6ea5a
+# Using devices
+#  Rank  0 Group  0 Pid 536086 on ziyue-mi300-vmss000008 device  0 [0002:00:00] AMD Instinct MI300X VF
+#  Rank  1 Group  0 Pid 536087 on ziyue-mi300-vmss000008 device  1 [0003:00:00] AMD Instinct MI300X VF
+#  Rank  2 Group  0 Pid 536088 on ziyue-mi300-vmss000008 device  2 [0004:00:00] AMD Instinct MI300X VF
+#  Rank  3 Group  0 Pid 536089 on ziyue-mi300-vmss000008 device  3 [0005:00:00] AMD Instinct MI300X VF
+#  Rank  4 Group  0 Pid 536090 on ziyue-mi300-vmss000008 device  4 [0006:00:00] AMD Instinct MI300X VF
+#  Rank  5 Group  0 Pid 536091 on ziyue-mi300-vmss000008 device  5 [0007:00:00] AMD Instinct MI300X VF
+#  Rank  6 Group  0 Pid 536092 on ziyue-mi300-vmss000008 device  6 [0008:00:00] AMD Instinct MI300X VF
+#  Rank  7 Group  0 Pid 536093 on ziyue-mi300-vmss000008 device  7 [0009:00:00] AMD Instinct MI300X VF
+RCCL version : 2.21.5-HEAD:eef7b29
+HIP version  : 6.3.42131-fa1d09cbd
+ROCm version : 6.3.0.0-39-ce2be3b
+Hostname     : ziyue-mi300-vmss000008
+Librccl path : /opt/rocm/lib/librccl.so
+#
+#                                                              out-of-place                       in-place          
+#       size         count      type   redop    root     time   algbw   busbw #wrong     time   algbw   busbw #wrong                               
+#        (B)    (elements)                               (us)  (GB/s)  (GB/s)            (us)  (GB/s)  (GB/s)                                      
+           8             2     float     sum      -1    17.31    0.00    0.00      0    17.17    0.00    0.00      0
+          16             4     float     sum      -1    17.01    0.00    0.00      0    17.14    0.00    0.00      0
+          32             8     float     sum      -1    17.09    0.00    0.00      0    17.15    0.00    0.00      0
+          64            16     float     sum      -1    17.30    0.00    0.01      0    17.31    0.00    0.01      0
+         128            32     float     sum      -1    17.42    0.01    0.01      0    17.50    0.01    0.01      0
+         256            64     float     sum      -1    17.69    0.01    0.03      0    17.70    0.01    0.03      0
+         512           128     float     sum      -1    18.42    0.03    0.05      0    18.40    0.03    0.05      0
+        1024           256     float     sum      -1    18.74    0.05    0.10      0    18.64    0.05    0.10      0
+        2048           512     float     sum      -1    19.28    0.11    0.19      0    19.15    0.11    0.19      0
+        4096          1024     float     sum      -1    20.53    0.20    0.35      0    19.15    0.21    0.37      0
+        8192          2048     float     sum      -1    22.80    0.36    0.63      0    20.17    0.41    0.71      0
+       16384          4096     float     sum      -1    27.44    0.60    1.04      0    20.20    0.81    1.42      0
+       32768          8192     float     sum      -1    28.31    1.16    2.03      0    20.44    1.60    2.81      0
+       65536         16384     float     sum      -1    28.09    2.33    4.08      0    20.38    3.22    5.63      0
+      131072         32768     float     sum      -1    28.16    4.65    8.15      0    20.49    6.40   11.20      0
+      262144         65536     float     sum      -1    28.67    9.14   16.00      0    20.91   12.54   21.94      0
+      524288        131072     float     sum      -1    49.88   10.51   18.39      0    22.31   23.50   41.13      0
+     1048576        262144     float     sum      -1    53.24   19.70   34.47      0    25.30   41.44   72.53      0
+     2097152        524288     float     sum      -1    59.97   34.97   61.19      0    32.52   64.48  112.84      0
+     4194304       1048576     float     sum      -1    76.59   54.76   95.84      0    51.07   82.12  143.72      0
+     8388608       2097152     float     sum      -1    100.2   83.73  146.52      0    84.94   98.76  172.83      0
+    16777216       4194304     float     sum      -1    155.5  107.88  188.79      0    153.1  109.59  191.78      0
+    33554432       8388608     float     sum      -1    241.0  139.25  243.69      0    282.4  118.84  207.97      0
+    67108864      16777216     float     sum      -1    427.4  157.02  274.79      0    534.4  125.57  219.75      0
+   134217728      33554432     float     sum      -1    796.2  168.57  295.00      0   1045.1  128.42  224.74      0
+   268435456      67108864     float     sum      -1   1542.4  174.04  304.57      0   2086.2  128.67  225.18      0
+   536870912     134217728     float     sum      -1   3034.3  176.94  309.64      0ziyue-mi300-vmss000008: Test timeout (1000s) /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:555
+ .. ziyue-mi300-vmss000008 pid 536086: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:660
+ .. ziyue-mi300-vmss000008 pid 536086: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:674
+ .. ziyue-mi300-vmss000008 pid 536086: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:974
+ .. ziyue-mi300-vmss000008 pid 536086: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:102
+ .. ziyue-mi300-vmss000008 pid 536086: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1002
+ .. ziyue-mi300-vmss000008 pid 536086: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1737
+ .. ziyue-mi300-vmss000008 pid 536086: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+ziyue-mi300-vmss000008: Test timeout (1000s) /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:555
+ .. ziyue-mi300-vmss000008 pid 536091: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:660
+ .. ziyue-mi300-vmss000008 pid 536091: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:674
+ .. ziyue-mi300-vmss000008 pid 536091: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:974
+ .. ziyue-mi300-vmss000008 pid 536091: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:102
+ .. ziyue-mi300-vmss000008 pid 536091: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1002
+ .. ziyue-mi300-vmss000008 pid 536091: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1737
+ .. ziyue-mi300-vmss000008 pid 536091: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+ziyue-mi300-vmss000008: Test timeout (1000s) /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:555
+ .. ziyue-mi300-vmss000008 pid 536092: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:660
+ .. ziyue-mi300-vmss000008 pid 536092: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:674
+ .. ziyue-mi300-vmss000008 pid 536092: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:974
+ .. ziyue-mi300-vmss000008 pid 536092: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:102
+ .. ziyue-mi300-vmss000008 pid 536092: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1002
+ .. ziyue-mi300-vmss000008 pid 536092: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1737
+ .. ziyue-mi300-vmss000008 pid 536092: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+ziyue-mi300-vmss000008: Test timeout (1000s) /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:555
+ .. ziyue-mi300-vmss000008 pid 536093: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:660
+ .. ziyue-mi300-vmss000008 pid 536093: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:674
+ .. ziyue-mi300-vmss000008 pid 536093: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:974
+ .. ziyue-mi300-vmss000008 pid 536093: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:102
+ .. ziyue-mi300-vmss000008 pid 536093: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1002
+ .. ziyue-mi300-vmss000008 pid 536093: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1737
+ .. ziyue-mi300-vmss000008 pid 536093: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+ziyue-mi300-vmss000008: Test timeout (1000s) /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:555
+ .. ziyue-mi300-vmss000008 pid 536090: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:660
+ .. ziyue-mi300-vmss000008 pid 536090: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:674
+ .. ziyue-mi300-vmss000008 pid 536090: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:974
+ .. ziyue-mi300-vmss000008 pid 536090: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:102
+ .. ziyue-mi300-vmss000008 pid 536090: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1002
+ .. ziyue-mi300-vmss000008 pid 536090: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1737
+ .. ziyue-mi300-vmss000008 pid 536090: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+ziyue-mi300-vmss000008: Test timeout (1000s) /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:555
+ .. ziyue-mi300-vmss000008 pid 536088: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:660
+ .. ziyue-mi300-vmss000008 pid 536088: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:674
+ .. ziyue-mi300-vmss000008 pid 536088: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:974
+ .. ziyue-mi300-vmss000008 pid 536088: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:102
+ .. ziyue-mi300-vmss000008 pid 536088: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1002
+ .. ziyue-mi300-vmss000008 pid 536088: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1737
+ .. ziyue-mi300-vmss000008 pid 536088: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+ziyue-mi300-vmss000008: Test timeout (1000s) /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:555
+ .. ziyue-mi300-vmss000008 pid 536089: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:660
+ .. ziyue-mi300-vmss000008 pid 536089: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:674
+ .. ziyue-mi300-vmss000008 pid 536089: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:974
+ .. ziyue-mi300-vmss000008 pid 536089: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:102
+ .. ziyue-mi300-vmss000008 pid 536089: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1002
+ .. ziyue-mi300-vmss000008 pid 536089: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1737
+ .. ziyue-mi300-vmss000008 pid 536089: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
+ziyue-mi300-vmss000008: Test timeout (1000s) /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:555
+ .. ziyue-mi300-vmss000008 pid 536087: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:660
+ .. ziyue-mi300-vmss000008 pid 536087: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:674
+ .. ziyue-mi300-vmss000008 pid 536087: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:974
+ .. ziyue-mi300-vmss000008 pid 536087: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/all_reduce.cu.cpp:102
+ .. ziyue-mi300-vmss000008 pid 536087: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1002
+ .. ziyue-mi300-vmss000008 pid 536087: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1737
+ .. ziyue-mi300-vmss000008 pid 536087: Test failure /mnt/v-feilong/rccl-tests/build/src/hipify/common.cu.cpp:1413
